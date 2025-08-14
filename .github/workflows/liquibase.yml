@@ -32,8 +32,9 @@ jobs:
         run: |
           curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
           tar -xzf liquibase.tar.gz
-          sudo mv liquibase-4.33.0/liquibase /usr/local/bin/liquibase
-          chmod +x /usr/local/bin/liquibase
+          sudo mv liquibase /opt/liquibase
+          echo "/opt/liquibase" >> $GITHUB_PATH
+
 
       # Download PostgreSQL JDBC driver
       - name: Download PostgreSQL JDBC driver
