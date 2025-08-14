@@ -9,3 +9,10 @@ CREATE TABLE users (
 
 --changeset me:5
 DROP TABLE users1;
+
+--changeset me:6
+CREATE TABLE users2 (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
