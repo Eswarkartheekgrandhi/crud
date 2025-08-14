@@ -7,7 +7,7 @@ liquibase \
   --url="jdbc:postgresql://$LIQUIBASE_HOST:$LIQUIBASE_PORT/$LIQUIBASE_DB" \
   --username="$LIQUIBASE_USER" \
   --password="$LIQUIBASE_PASS" \
-  --changeLogFile=db/changelog/db.changelog-master.xml \
+  --changeLogFile=db/changelog/db.changelog-master.sql \
   update
 
 echo "Liquibase update finished."
