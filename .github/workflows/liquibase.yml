@@ -31,9 +31,7 @@ jobs:
         run: |
           curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
           tar -xzf liquibase.tar.gz
-          sudo mv liquibase /usr/local/bin/
-          sudo chmod +x /usr/local/bin/liquibase/liquibase
-          echo 'export PATH=$PATH:/usr/local/bin/liquibase' >> $GITHUB_ENV
+          sudo mv liquibase /usr/local/bin/liquibase
 
       - name: Download PostgreSQL JDBC driver
         run: |
@@ -42,7 +40,7 @@ jobs:
 
       - name: Run Liquibase update
         run: |
-          /usr/local/bin/liquibase/liquibase \
+          liquibase \
             --url="jdbc:postgresql://postgres:5432/cruddb" \
             --username=postgres \
             --password=7702 \
