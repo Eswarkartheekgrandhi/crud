@@ -7,5 +7,5 @@ CREATE TABLE users1 (
     password VARCHAR(255) NOT NULL
 );
 
---changeset me:2
-DROP TABLE users1;
+-- --changeset me:2
+-- DROP TABLE users1;
