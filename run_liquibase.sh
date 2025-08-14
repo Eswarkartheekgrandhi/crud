@@ -1,13 +1,9 @@
 #!/bin/bash
-set -e
-
-echo "Running Liquibase update..."
+set -e  # exit if any command fails
 
 liquibase \
-  --url="jdbc:postgresql://$LIQUIBASE_HOST:$LIQUIBASE_PORT/$LIQUIBASE_DB" \
-  --username="$LIQUIBASE_USER" \
-  --password="$LIQUIBASE_PASS" \
-  --changeLogFile=db/changelog/db.changelog-master.sql \
+  --url="jdbc:postgresql://localhost:5432/cruddb" \
+  --username="postgres" \
+  --password="7702" \
+  --changeLogFile="db/changelog/db.changelog-master.sql" \
   update
-
-echo "Liquibase update finished."

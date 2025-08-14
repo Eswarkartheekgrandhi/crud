@@ -1,0 +1,36 @@
+name: Liquibase CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  liquibase-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Download Liquibase
+        run: |
+          curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
+          tar -xzf liquibase.tar.gz
+          sudo mv liquibase /usr/local/bin/liquibase
+          chmod +x /usr/local/bin/liquibase/liquibase
+
+      - name: Download PostgreSQL JDBC Driver
+        run: |
+          mkdir -p lib
+          curl -Lo lib/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
+
+      - name: Run Liquibase Update
+        run: ./run_liquibase.sh

@@ -28,6 +28,7 @@ Make sure the JAR is in lib/.
 4) Add Liquibase Changelog (db/changelog/db.changelog-master.xml)
 
 5) Add Bash Script to Run Liquibase (run_liquibase.sh)
+set -e --> Exit the script immediately if any command fails (non-zero exit status).
 Make it executable in Git Bash:
 chmod +x run_liquibase.sh  --> Gives execute permissions
 Run it:
