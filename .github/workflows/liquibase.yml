@@ -10,27 +10,38 @@ jobs:
   liquibase-update:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 7702
+          POSTGRES_DB: cruddb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          distribution: "temurin"
-
-      - name: Download Liquibase
-        run: |
-          curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
-          tar -xzf liquibase.tar.gz
-          sudo mv liquibase /usr/local/bin/liquibase
-          chmod +x /usr/local/bin/liquibase/liquibase
 
       - name: Download PostgreSQL JDBC Driver
         run: |
           mkdir -p lib
           curl -Lo lib/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
-      - name: Run Liquibase Update
-        run: ./run_liquibase.sh
+      - name: Run Liquibase Update via Docker
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/liquibase/changelog \
+            liquibase/liquibase:latest \
+            --url="jdbc:postgresql://host.docker.internal:5432/cruddb" \
+            --username="postgres" \
+            --password="7702" \
+            --changeLogFile="db/changelog/db.changelog-master.xml" \
+            --classpath=/liquibase/changelog/lib/postgresql-42.7.3.jar \
+            update
