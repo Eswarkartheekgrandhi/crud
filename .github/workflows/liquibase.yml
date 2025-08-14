@@ -27,15 +27,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Install Liquibase and make it available for all steps
+      # Install Liquibase CLI
       - name: Install Liquibase
         run: |
           curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
           tar -xzf liquibase.tar.gz
-          sudo mv liquibase /opt/liquibase
-          echo "/opt/liquibase" >> $GITHUB_PATH
+          sudo mv liquibase-4.33.0/liquibase /usr/local/bin/liquibase
+          chmod +x /usr/local/bin/liquibase
 
-      # Download JDBC driver
+      # Download PostgreSQL JDBC driver
       - name: Download PostgreSQL JDBC driver
         run: |
           mkdir -p lib
