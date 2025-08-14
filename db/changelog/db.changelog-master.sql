@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset me:1
+--changeset me:3
 CREATE TABLE users1 (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
