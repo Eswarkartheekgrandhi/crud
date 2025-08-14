@@ -6,3 +6,6 @@ CREATE TABLE users (
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+
+--changeset me:5
+DROP TABLE users1;
