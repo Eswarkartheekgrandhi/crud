@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+</head>
+<body>
+    <h2>Users</h2>
+    <ul>
+        {% for u in users %}
+            <li>{{ u[1] }} - <a href="/edit/{{u[0]}}">Edit</a> | <a href="/delete/{{u[0]}}">Delete</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add User</h3>
+    <form method="post" action="/add">
+        Username: <input name="username" required>
+        Password: <input type="password" name="password" required>
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
