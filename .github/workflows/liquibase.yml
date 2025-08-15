@@ -46,7 +46,7 @@ jobs:
       - name: Run Liquibase update
         run: |
           liquibase \
-            --url="jdbc:postgresql://<your-local-ip>:5432/cruddb" \
+            --url="jdbc:postgresql://49.205.250.184:5432/cruddb" \
             --username=postgres \
             --password=7702 \
             --changeLogFile=db/changelog/db.changelog-master.sql \
