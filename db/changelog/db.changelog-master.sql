@@ -8,7 +8,7 @@ CREATE TABLE users (
 );
 
 --changeset me:5
-DROP TABLE users1;
+DROP TABLE IF EXISTS users1;
 
 --changeset me:6
 CREATE TABLE users2 (
@@ -18,7 +18,7 @@ CREATE TABLE users2 (
 );
 
 --changeset me:7
-DROP TABLE users2;
+DROP TABLE IF EXISTS users2;
 
 --changeset me:8
 CREATE TABLE users3 (
