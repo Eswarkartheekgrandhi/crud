@@ -29,13 +29,16 @@ jobs:
 
       - name: Install Liquibase
         run: |
+          set -e
           curl -Lo liquibase.tar.gz https://github.com/liquibase/liquibase/releases/download/v4.33.0/liquibase-4.33.0.tar.gz
-          tar -xzf liquibase.tar.gz
-          extracted_dir=$(tar -tzf liquibase.tar.gz | head -1 | cut -f1 -d"/")
+          mkdir -p liquibase_temp
+          tar -xzf liquibase.tar.gz -C liquibase_temp
+          extracted_dir=$(find liquibase_temp -mindepth 1 -maxdepth 1 -type d)
           sudo mv "$extracted_dir" /opt/liquibase
-          chmod +x /opt/liquibase/liquibase
+          sudo chmod +x /opt/liquibase/liquibase
           echo "/opt/liquibase" >> $GITHUB_PATH
-          echo "/opt/liquibase/bin" >> $GITHUB_PATH
+
+
 
 
       - name: Download PostgreSQL JDBC driver
